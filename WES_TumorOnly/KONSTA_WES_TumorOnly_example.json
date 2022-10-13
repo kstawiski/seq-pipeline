@@ -1,7 +1,6 @@
 {
+  "KONSTA_WES_TumorOnly.sex": "XY",
   "KONSTA_WES_TumorOnly.tumorBamIdx": "/data-onix/Projekty/KS_DFCI/TWIST/Data/Example/BR-21-6D0033.bam.bai",
-  "KONSTA_WES_TumorOnly.sex": "XX",
   "KONSTA_WES_TumorOnly.sampleName": "BR-21-6D0033",
   "KONSTA_WES_TumorOnly.tumorBam": "/data-onix/Projekty/KS_DFCI/TWIST/Data/Example/BR-21-6D0033.bam"
 }
-
