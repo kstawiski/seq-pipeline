@@ -35,7 +35,7 @@ task Mapping {
         Int ramGb
     }
        
-    command <<<     
+    command {   
         set -euxo pipefail
 
         # make symbolic links to ensure BAM and index are in expected structure even after localization.
@@ -59,7 +59,7 @@ task Mapping {
         # get results
         zip -r /Results.zip /Results
 
-    >>>
+    } 
 
     output {      
         File mapping_results = "/Results.zip"
