@@ -37,7 +37,7 @@ task Mapping {
     }
        
     command <<<   
-        set -euxo pipefail
+        #set -euxo pipefail
 
         # make symbolic links to ensure BAM and index are in expected structure even after localization.
         mkdir /processing_dir
@@ -66,7 +66,7 @@ task Mapping {
         File mapping_results = "/Results.zip"
        }
     runtime {    
-        docker: "ghcr.io/kstawiski/seq-pipeline:main"
+        docker: "kstawiski/seq-pipeline"
         cpu: "${cpus}"
         memory: "${ramGb}GB"
         disks: "local-disk ${diskGb} HDD"
