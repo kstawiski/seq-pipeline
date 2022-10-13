@@ -1,6 +1,6 @@
 {
-  "KONSTA_WES_TumorOnly.tumorBamIdx": "File",
   "KONSTA_WES_TumorOnly.sex": "String (optional, default = \"XY\")",
+  "KONSTA_WES_TumorOnly.tumorBamIdx": "File",
   "KONSTA_WES_TumorOnly.sampleName": "String (optional, default = \"Sample1\")",
   "KONSTA_WES_TumorOnly.tumorBam": "File"
 }
