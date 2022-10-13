@@ -1,9 +1,0 @@
-{
-  "KONSTA_WES_TumorOnly.sampleName": "Sample1",
-  "KONSTA_WES_TumorOnly.cpus": "16",
-  "KONSTA_WES_TumorOnly.diskGb": "150",
-  "KONSTA_WES_TumorOnly.ramGb": "32",
-  "KONSTA_WES_TumorOnly.sex": "XY",
-  "KONSTA_WES_TumorOnly.tumorBam": "/data-onix/Projekty/KS_DFCI/TWIST/Data/Example/BR-21-6D0033.bam",
-  "KONSTA_WES_TumorOnly.tumorBamIdx": "/data-onix/Projekty/KS_DFCI/TWIST/Data/Example/BR-21-6D0033.bam.bai"
-}
