@@ -31,4 +31,5 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 COPY WES_TumorOnly /WES_TumorOnly
 
 
+
 ENTRYPOINT ["/bin/bash"]
