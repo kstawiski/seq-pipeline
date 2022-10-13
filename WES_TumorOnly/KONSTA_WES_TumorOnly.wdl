@@ -1,16 +1,17 @@
 version 1.0
 
 workflow KONSTA_WES_TumorOnly {
-    input {
+
+    input{ 
         String sampleName = "Sample1"
         String sex = "XY"
         File tumorBam
         File tumorBamIdx
-    }
     
-    Int diskGb = ceil((size(tumorBam, "GB") + size(tumorBamIdx, "GB"))*4 + 50)
-    Int cpus = 16
-    Int ramGb = 32
+        Int diskGb = 200
+        Int cpus = 16
+        Int ramGb = 32
+    }
 
     call Mapping {
         input:
@@ -35,7 +36,7 @@ task Mapping {
         Int ramGb
     }
        
-    command {   
+    command <<<   
         set -euxo pipefail
 
         # make symbolic links to ensure BAM and index are in expected structure even after localization.
@@ -59,7 +60,7 @@ task Mapping {
         # get results
         zip -r /Results.zip /Results
 
-    } 
+    >>> 
 
     output {      
         File mapping_results = "/Results.zip"
