@@ -19,7 +19,7 @@ RUN rm Miniconda3-latest-Linux-x86_64.sh &&\
     echo "conda activate base" >> ~/.bashrc
 ENV TENSORFLOW_PYTHON /opt/conda/bin/python
 ENV RETICULATE_PYTHON /opt/conda/bin/python
-RUN conda install -c conda-forge -c bioconda mamba singularity nextflow
+RUN conda install -c conda-forge -c bioconda mamba singularity
 
 # R:
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran40/" && apt update && apt -y dist-upgrade && apt install -y r-base-dev r-recommended build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev default-jre default-jdk && Rscript -e "install.packages(c('data.table','dplyr'))"
