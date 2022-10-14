@@ -46,7 +46,7 @@ task Mapping {
         conda config --add channels conda-forge
         conda config --set channel_priority strict
 
-        mamba install -c bioconda nextflow samtools bwa gatk deepvariant freebayes bcftools strelka manta tiddit cnvkit ascat control-freec msisensor-pro snpeff ensembl-vep multiqc
+        mamba install -c bioconda nextflow samtools
         mkdir /processing_dir
         ln -s ~{tumorBam} /processing_dir/tumor.bam
         ln -s ~{tumorBamIdx} /processing_dir/tumor.bai

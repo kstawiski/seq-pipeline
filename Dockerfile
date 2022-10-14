@@ -27,8 +27,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
 # Google Cloud for Terra
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
 
-# Install most common seq tools
-RUN mamba install -c bioconda nextflow samtools bwa gatk deepvariant freebayes bcftools strelka manta tiddit cnvkit ascat control-freec msisensor-pro snpeff ensembl-vep multiqc star salmon bowtie2 
+# Get docker for docker in docker
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo bash get-docker.sh && rm get-docker.sh
 
 ADD Docker_init.sh /
 RUN chmod +x /Docker_init.sh
