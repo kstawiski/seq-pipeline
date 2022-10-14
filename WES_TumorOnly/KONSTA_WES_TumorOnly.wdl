@@ -37,6 +37,7 @@ task Mapping {
     }
        
     command <<<   
+        /Docker_init.sh
         /bin/bash /seq-pipeline/WES_TumorOnly/mapping.sh
     >>> 
 
