@@ -19,13 +19,16 @@ RUN rm Miniconda3-latest-Linux-x86_64.sh &&\
     echo "conda activate base" >> ~/.bashrc
 ENV TENSORFLOW_PYTHON /opt/conda/bin/python
 ENV RETICULATE_PYTHON /opt/conda/bin/python
-RUN conda install -c conda-forge -c bioconda mamba singularity
+RUN conda config --add channels defaults && conda config --add channels bioconda && conda config --add channels conda-forge && conda config --set channel_priority strict && conda install -c conda-forge -c bioconda mamba
 
 # R:
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran40/" && apt update && apt -y dist-upgrade && apt install -y r-base-dev r-recommended build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev openjdk-18-jre-headless && Rscript -e "install.packages(c('data.table','dplyr'))"
 
 # Google Cloud for Terra
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
+
+# Install most common seq tools
+RUN mamba install -c bioconda nextflow samtools bwa gatk deepvariant freebayes bcftools strelka manta tiddit cnvkit ascat control-freec msisensor-pro snpeff ensembl-vep multiqc star salmon bowtie2 
 
 ADD Docker_init.sh /
 RUN chmod +x /Docker_init.sh
