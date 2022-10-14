@@ -4,5 +4,5 @@
 cd /
 git clone https://github.com/kstawiski/seq-pipeline
 
-/bin/bash -c "conda init bash"
+conda init bash
 /bin/bash

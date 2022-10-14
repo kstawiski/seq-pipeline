@@ -27,5 +27,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
 # Google Cloud for Terra
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
 
-COPY Docker_init.sh /
-ENTRYPOINT ["/bin/bash /Docker_init.sh"]
+ADD Docker_init.sh /
+RUN chmod +x /Docker_init.sh
+ENTRYPOINT ["/Docker_init.sh"]
+CMD ["/bin/bash"]
