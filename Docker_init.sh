@@ -6,4 +6,3 @@ git clone https://github.com/kstawiski/seq-pipeline
 
 conda init bash
 source ~/.bashrc
-/bin/bash $1
