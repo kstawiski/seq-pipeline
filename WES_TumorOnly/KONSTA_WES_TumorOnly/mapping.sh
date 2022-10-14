@@ -7,7 +7,7 @@ ln -s ${tumorBam} /processing_dir/tumor.bam
 ln -s ${tumorBamIdx} /processing_dir/tumor.bai
 
 # prepare samplefile
-RScript /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/prepare_samplesheet.R ${sampleName} ${sex}
+Rscript /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/prepare_samplesheet.R ${sampleName} ${sex}
 
 # nextflow
 nextflow self-update
