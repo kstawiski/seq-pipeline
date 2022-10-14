@@ -1,5 +1,4 @@
 #!/bin/bash
-source ~/.bashrc
 
 # make symbolic links to ensure BAM and index are in expected structure even after localization.
 conda activate base
@@ -8,7 +7,7 @@ ln -s ${tumorBam} /processing_dir/tumor.bam
 ln -s ${tumorBamIdx} /processing_dir/tumor.bai
 
 # prepare samplefile
-/bin/bash -c "RScript /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/prepare_samplesheet.R ${sampleName} ${sex}"
+RScript /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/prepare_samplesheet.R ${sampleName} ${sex}
 
 # nextflow
 nextflow self-update
