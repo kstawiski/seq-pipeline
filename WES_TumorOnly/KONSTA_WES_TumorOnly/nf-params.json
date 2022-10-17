@@ -2,5 +2,5 @@
     "input": "\/processing_dir\/samplesheet.csv",
     "outdir": "\/Results",
     "wes": true,
-    "tools": "freebayes,mpileup,mutect2,strelka,manta,tiddit,cnvkit,controlfreec,snpeff,vep,merge"
+    "tools": "freebayes,mutect2,strelka,manta,tiddit,cnvkit,snpeff,vep,merge"
 }

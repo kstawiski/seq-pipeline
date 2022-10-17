@@ -5,10 +5,12 @@ workflow KONSTA_WES_TumorOnly {
     input{ 
         String sampleName = "Sample1"
         String sex = "XY"
+        String genome = "GATK.GRCh38"
+        String iGenomesPath = "s3://ngi-igenomes/igenomes/"
         File tumorBam
         File tumorBamIdx
     
-        Int diskGb = 200
+        Int diskGb = 250
         Int cpus = 16
         Int ramGb = 32
     }
@@ -17,7 +19,9 @@ workflow KONSTA_WES_TumorOnly {
         input:
             sampleName = sampleName,
             tumorBam = tumorBam,
+            genome = genome,
             tumorBamIdx = tumorBamIdx,
+            iGenomesPath = iGenomesPath,
             diskGb = diskGb,
             cpus = cpus,
             ramGb = ramGb,
@@ -29,6 +33,8 @@ task Mapping {
   input {
         String sampleName
         String sex
+        String iGenomesPath
+        String genome
         File tumorBam
         File tumorBamIdx
         Int diskGb
@@ -41,12 +47,9 @@ task Mapping {
         
         # make symbolic links to ensure BAM and index are in expected structure even after localization.
         conda activate base
-        conda config --add channels defaults
-        conda config --add channels bioconda
-        conda config --add channels conda-forge
-        conda config --set channel_priority strict
 
-        mamba install -c bioconda nextflow samtools
+        mamba install -c bioconda -c conda-forge nextflow
+        apt-get -y install awscli samtools bcftools bwa bowtie2 bowtie freebayes
         mkdir /processing_dir
         ln -s ~{tumorBam} /processing_dir/tumor.bam
         ln -s ~{tumorBamIdx} /processing_dir/tumor.bai
@@ -61,14 +64,14 @@ task Mapping {
         export _JAVA_OPTIONS="-Xmx~{ramGb}g"
 
         nextflow pull nf-core/sarek -r 3.0.2
-        nextflow run nf-core/sarek -r 3.0.2 -profile conda --genome "GATK.GRCh38" -work-dir "/tmp/work/" -resume --step "mapping" -params-file /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/nf-params.json
+        nextflow run nf-core/sarek -r 3.0.2 -profile conda --genome "~{genome}" -work-dir "/tmp/work/" -resume --step "mapping"  --igenomes_base "~{iGenomesPath}" -params-file /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/nf-params.json
 
-        # get results
+        cp /processing_dir/samplesheet.csv /Results/samplesheet.csv
         zip -r Results.zip /Results
     >>> 
 
     output {      
-        File mapping_results = "Results.zip"
+        File nextflow_results = "Results.zip"
        }
     runtime {    
         docker: "kstawiski/seq-pipeline"
