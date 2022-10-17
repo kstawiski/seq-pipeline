@@ -1,0 +1,6 @@
+[submodule "Tools/Tools/vcfMerger2"]
+	path = Tools/Tools/vcfMerger2
+	url = https://github.com/tgen/vcfMerger2.git
+[submodule "Tools/vcfMerger2"]
+	path = Tools/vcfMerger2
+	url = https://github.com/tgen/vcfMerger2.git
