@@ -49,7 +49,8 @@ task Mapping {
         conda activate base
 
         mamba install -c bioconda -c conda-forge nextflow
-        apt-get -y install awscli samtools bcftools bwa bowtie2 bowtie freebayes
+        # apt-get -y install awscli samtools bcftools bwa bowtie2 bowtie freebayes tabix 
+        # pip install cnvkit 
         mkdir /processing_dir
         ln -s ~{tumorBam} /processing_dir/tumor.bam
         ln -s ~{tumorBamIdx} /processing_dir/tumor.bai
@@ -62,9 +63,10 @@ task Mapping {
 
         export NXF_OPTS="-Xms4g -Xmx~{ramGb}g"
         export _JAVA_OPTIONS="-Xmx~{ramGb}g"
+        export USER="root"
 
         nextflow pull nf-core/sarek -r 3.0.2
-        nextflow run nf-core/sarek -r 3.0.2 -profile conda --genome "~{genome}" -work-dir "/tmp/work/" -resume --step "mapping"  --igenomes_base "~{iGenomesPath}" -params-file /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/nf-params.json
+        nextflow run nf-core/sarek -r 3.0.2 -profile charliecloud --genome "~{genome}" -work-dir "/tmp/work/" -resume --step "mapping"  --igenomes_base "~{iGenomesPath}" -params-file /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/nf-params.json
 
         cp /processing_dir/samplesheet.csv /Results/samplesheet.csv
         zip -r Results.zip /Results
