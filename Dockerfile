@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:focal
 LABEL maintainer "Konrad Stawiski <konrad@konsta.com.pl>"
 
 ENV DEBIAN_FRONTEND=noninteractive
