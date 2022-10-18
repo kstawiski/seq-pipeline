@@ -34,7 +34,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
 # RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo bash get-docker.sh && rm get-docker.sh
 
 # Charliecloud
-RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure --with-libsquashfuse=yes  && make && make install
+RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
 
 ADD Docker_init.sh /
 RUN chmod +x /Docker_init.sh
