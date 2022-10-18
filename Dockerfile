@@ -39,6 +39,9 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 # Ngrok
 RUN wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz && tar xvzf ngrok-v3-stable-linux-amd64.tgz && rm ngrok-v3-stable-linux-amd64.tgz && ./ngrok config add-authtoken 2GJj2YAtqhxPapAatx2QxqfKn61_5PRMDpMj5n9vwMrtCeMNe 
 
+# Signularity - get new from https://github.com/sylabs/singularity/releases
+RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singularity-ce_3.10.3-focal_amd64.deb && apt install ./singularity-ce_3.10.3-focal_amd64.deb && rm ./singularity*.deb
+
 # Charliecloud
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
 
