@@ -4,5 +4,10 @@
 cd /
 git clone https://github.com/kstawiski/seq-pipeline
 
+# set up code-server
+export PASSWORD=konrad
+nohup code-server --password --disable-update-check &
+nohup /ngrok http 8080 > /ngrok.log &
+
 conda init bash
-source ~/.bashrc
+/bin/bash
