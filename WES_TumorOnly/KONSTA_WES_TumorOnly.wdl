@@ -43,7 +43,7 @@ task Mapping {
     }
        
     command <<<   
-        /Docker_init.sh 
+        /Docker_setup.sh 
         
         # make symbolic links to ensure BAM and index are in expected structure even after localization.
         conda activate base
@@ -66,7 +66,7 @@ task Mapping {
         export USER="root"
 
         nextflow pull nf-core/sarek -r 3.0.2
-        nextflow run nf-core/sarek -r 3.0.2 -profile charliecloud --genome "~{genome}" -work-dir "/tmp/work/" -resume --step "mapping"  --igenomes_base "~{iGenomesPath}" -params-file /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/nf-params.json
+        nextflow run nf-core/sarek -r 3.0.2 -profile singularity --genome "~{genome}" -work-dir "/tmp/work/" -resume --step "mapping"  --igenomes_base "~{iGenomesPath}" -params-file /seq-pipeline/WES_TumorOnly/KONSTA_WES_TumorOnly/nf-params.json
 
         cp /processing_dir/samplesheet.csv /Results/samplesheet.csv
         zip -r Results.zip /Results
