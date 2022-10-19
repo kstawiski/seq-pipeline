@@ -49,4 +49,4 @@ ADD Docker_init.sh /
 RUN chmod +x /Docker_init.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 8080
-CMD["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]
