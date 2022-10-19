@@ -37,7 +37,7 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo bash get-docker.s
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Localtunnel
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && apt-get install -y npm && rm nodesource_setup.sh && apt-get install -y nodejs && npm install -g localtunnel
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && apt-get install -y npm && apt-get install -y nodejs && npm install -g localtunnel
 
 # Signularity - get new from https://github.com/sylabs/singularity/releases
 RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singularity-ce_3.10.3-focal_amd64.deb && apt -y install ./singularity-ce_3.10.3-focal_amd64.deb && rm ./singularity*.deb
