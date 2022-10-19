@@ -36,8 +36,8 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo bash get-docker.s
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Ngrok
-RUN wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz && tar xvzf ngrok-v3-stable-linux-amd64.tgz && rm ngrok-v3-stable-linux-amd64.tgz && ./ngrok config add-authtoken 2GJj2YAtqhxPapAatx2QxqfKn61_5PRMDpMj5n9vwMrtCeMNe 
+# Localtunnel
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh && bash nodesource_setup.sh && apt-get install -y nodejs npm && rm nodesource_setup.sh && npm install -g localtunnel
 
 # Signularity - get new from https://github.com/sylabs/singularity/releases
 RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singularity-ce_3.10.3-focal_amd64.deb && apt -y install ./singularity-ce_3.10.3-focal_amd64.deb && rm ./singularity*.deb
