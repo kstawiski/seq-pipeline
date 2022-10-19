@@ -22,7 +22,7 @@ ENV RETICULATE_PYTHON /opt/conda/bin/python
 RUN conda config --add channels defaults && conda config --add channels bioconda && conda config --add channels conda-forge && conda config --set channel_priority strict && conda install -c conda-forge -c bioconda mamba
 
 # Install common tools:
-RUN mamba install -c bioconda -c conda-forge nextflow && apt-get -y install awscli samtools bcftools
+RUN mamba install -c bioconda -c conda-forge nextflow && apt-get -y install awscli samtools bcftools && pip3 install dbxfs
 
 # R:
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran40/" && apt update && apt -y dist-upgrade && apt install -y r-base-dev r-recommended build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev && Rscript -e "install.packages(c('data.table','dplyr'))"
