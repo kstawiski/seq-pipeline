@@ -42,6 +42,9 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh && bas
 # Signularity - get new from https://github.com/sylabs/singularity/releases
 RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singularity-ce_3.10.3-focal_amd64.deb && apt -y install ./singularity-ce_3.10.3-focal_amd64.deb && rm ./singularity*.deb
 
+# Rclone
+RUN curl https://rclone.org/install.sh | bash
+
 # Charliecloud
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
 
