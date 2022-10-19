@@ -46,6 +46,7 @@ RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singula
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
 
 ADD Docker_init.sh /
+ADD config.yaml /
 RUN chmod +x /Docker_init.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 8080
