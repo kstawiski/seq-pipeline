@@ -57,7 +57,7 @@ RUN apt-get install -y libclang-dev libssl-dev gdebi-core && wget https://downlo
 
 # Build GUI
 COPY www/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
-RUN chsh -s /bin/bash && echo 'export PATH="/opt/conda/bin:$PATH"' >> ~/.bashrc && apt-get install -y --reinstall build-essential apt-utils && chmod +x /entrypoint.sh && add-apt-repository -y ppa:ondrej/php && apt update && apt -y dist-upgrade && apt-get install -y nginx php7.3-fpm php7.3-common php7.3-mysql php7.3-gmp php7.3-curl php7.3-intl php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-xml php7.3-cli php7.3-zip php7.3-soap php7.3-imap nano
+RUN chsh -s /bin/bash && echo 'export PATH="/opt/conda/bin:$PATH"' >> ~/.bashrc && apt-get install -y --reinstall build-essential apt-utils && add-apt-repository -y ppa:ondrej/php && apt update && apt -y dist-upgrade && apt-get install -y nginx php7.3-fpm php7.3-common php7.3-mysql php7.3-gmp php7.3-curl php7.3-intl php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-xml php7.3-cli php7.3-zip php7.3-soap php7.3-imap nano
 
 COPY www/nginx.conf /etc/nginx/nginx.conf
 COPY www/php.ini /etc/php/7.3/fpm/php.ini
