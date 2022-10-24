@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Setup Ubuntu
 ENV TZ=Europe/Warsaw
-RUN chsh -s /bin/bash root && echo 'SHELL=/bin/bash' >> /etc/environment && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt update && apt dist-upgrade -y && apt-get install -y pciutils libkmod-dev libgsl-dev libv8-dev mc nano libglu1-mesa-dev libharfbuzz-dev libfribidi-dev libgit2-dev gdebi uuid apt-transport-https screen libfontconfig1-dev build-essential libxml2-dev xorg ca-certificates cmake curl git libatlas-base-dev libcurl4-openssl-dev libjemalloc-dev liblapack-dev libopenblas-dev libzmq3-dev software-properties-common sudo unzip wget && add-apt-repository -y ppa:ubuntu-toolchain-r/test && apt update && apt install -y build-essential libmagick++-dev libbz2-dev libpcre2-16-0 libpcre2-32-0 libpcre2-8-0 libpcre2-dev fort77 xorg-dev liblzma-dev  libblas-dev gfortran gcc-multilib gobjc++ libreadline-dev && apt install -y libcairo2-dev freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev libglfw3-dev libgles2-mesa-dev libopenblas-dev liblapack-dev build-essential git gcc cmake libcairo2-dev libxml2-dev build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev awscli libsquashfuse-dev supervisor
+RUN chsh -s /bin/bash root && echo 'SHELL=/bin/bash' >> /etc/environment && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt update && apt dist-upgrade -y && apt-get install -y pciutils libkmod-dev libgsl-dev libv8-dev mc nano libglu1-mesa-dev libharfbuzz-dev libfribidi-dev libgit2-dev gdebi uuid apt-transport-https screen libfontconfig1-dev build-essential libxml2-dev xorg ca-certificates cmake curl git libatlas-base-dev libcurl4-openssl-dev libjemalloc-dev liblapack-dev libopenblas-dev libzmq3-dev software-properties-common sudo unzip wget && add-apt-repository -y ppa:ubuntu-toolchain-r/test && apt update && apt install -y build-essential libmagick++-dev libbz2-dev libpcre2-16-0 libpcre2-32-0 libpcre2-8-0 libpcre2-dev fort77 xorg-dev liblzma-dev  libblas-dev gfortran gcc-multilib gobjc++ libreadline-dev && apt install -y libcairo2-dev freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev libglfw3-dev libgles2-mesa-dev libopenblas-dev liblapack-dev build-essential git gcc cmake libcairo2-dev libxml2-dev build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev awscli libsquashfuse-dev supervisor && mkdir /www && mkdir /work
 
 # Install Anaconda
 ENV PATH /opt/conda/bin:$PATH
@@ -44,6 +44,26 @@ RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singula
 
 # Rclone
 RUN curl https://rclone.org/install.sh | bash
+
+# VSCODE:
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
+# Extentions
+RUN conda install -c conda-forge jupyter_contrib_nbextensions nbresuse && jupyter contrib nbextension install --sys-prefix && jupyter nbextension enable varInspector/main && jupyter nbextension install --py nbresuse --sys-prefix && jupyter nbextension enable --py nbresuse --sys-prefix && pip install -U scikit-learn xgboost
+RUN pip install nbzip && jupyter serverextension enable --py nbzip --sys-prefix && jupyter nbextension install --py nbzip && jupyter nbextension enable --py nbzip
+
+# RStudio server:
+RUN apt-get install -y libclang-dev libssl-dev gdebi-core && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.02.3-492-amd64.deb && gdebi -n rstudio-server-2022.02.3-492-amd64.deb && apt -f -y install && cd / && rm rstudio-server-2022.02.3-492-amd64.deb
+
+# Build GUI
+COPY www/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
+RUN chsh -s /bin/bash && echo 'export PATH="/opt/conda/bin:$PATH"' >> ~/.bashrc && apt-get install -y --reinstall build-essential apt-utils && chmod +x /entrypoint.sh && add-apt-repository -y ppa:ondrej/php && apt update && apt -y dist-upgrade && apt-get install -y nginx php7.3-fpm php7.3-common php7.3-mysql php7.3-gmp php7.3-curl php7.3-intl php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-xml php7.3-cli php7.3-zip php7.3-soap php7.3-imap nano
+
+COPY www/nginx.conf /etc/nginx/nginx.conf
+COPY www/php.ini /etc/php/7.3/fpm/php.ini
+COPY www/default /etc/nginx/sites-available/default
+COPY www/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY www/index.php /var/www/html/index.php
 
 # Charliecloud
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install

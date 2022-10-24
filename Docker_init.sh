@@ -9,5 +9,10 @@ git clone https://github.com/kstawiski/seq-pipeline
 # nohup code-server --password --disable-update-check &
 # nohup /ngrok http 8080 --log=stdout > /ngrok.log &
 
+mkdir -p /run/
+mkdir -p /run/php/
+
+
+
 conda init bash
 /bin/bash
