@@ -12,7 +12,7 @@ git clone https://github.com/kstawiski/seq-pipeline
 mkdir -p /run/
 mkdir -p /run/php/
 
-
+ln -s /work /root/work
 
 conda init bash
 /bin/bash

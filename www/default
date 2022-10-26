@@ -2,9 +2,13 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
+  auth_basic           "Protection";
+  auth_basic_user_file /www/.htpasswd;
+
 	server_name _;
 
-	location ~* /e/.* {
+  rewrite ^/e$ $scheme://$http_host/e/ permanent;
+	location /e/ {
             proxy_pass http://127.0.0.1:8888;
 
             proxy_set_header Host $http_host;
