@@ -9,7 +9,7 @@ This is the Docker image with VSCode, RStduio and Jupyter Notebook running. Grea
 
 ```
 docker pull ghcr.io/kstawiski/seq-pipeline:main
-docker run --rm -d --name kgs24-work -v $(pwd):/work/ -p 26969:80 --privileged -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/kstawiski/seq-pipeline:main
+docker run --rm -d --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work/ -p 26969:80 --privileged -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/kstawiski/seq-pipeline:main
 ```
 ### Check tunnel:
 
