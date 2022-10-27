@@ -54,7 +54,7 @@ RUN conda install -c conda-forge jupyter_contrib_nbextensions nbresuse && jupyte
 RUN pip install nbzip && jupyter serverextension enable --py nbzip --sys-prefix && jupyter nbextension install --py nbzip && jupyter nbextension enable --py nbzip
 
 # RStudio server:
-RUN apt-get install -y libclang-dev libssl-dev gdebi-core && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.2-576-amd64.deb && gdebi -n rstudio-server-2022.02.3-492-amd64.deb && apt -f -y install && cd / && rm rstudio-server-2022.02.3-492-amd64.deb
+RUN apt-get install -y libclang-dev libssl-dev gdebi-core && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.2-576-amd64.deb && gdebi -n rstudio-server-2022.07.2-576-amd64.deb && apt -f -y install && cd / && rm rstudio-server-2022.07.2-576-amd64.deb
 
 # Build GUI
 COPY www/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
