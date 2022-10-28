@@ -64,7 +64,7 @@ COPY www/nginx.conf /etc/nginx/nginx.conf
 COPY www/php.ini /etc/php/7.3/fpm/php.ini
 COPY www/default /etc/nginx/sites-available/default
 COPY www/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-COPY www/index.php /www/index.php
+ADD www /www
 COPY .htpasswd /www/.htpasswd
 
 # R packages

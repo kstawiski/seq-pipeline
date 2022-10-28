@@ -9,6 +9,8 @@ git clone https://github.com/kstawiski/seq-pipeline
 # nohup code-server --password --disable-update-check &
 # nohup /ngrok http 8080 --log=stdout > /ngrok.log &
 
+cp /www/f_config.php /www/f/config.php
+
 mkdir -p /run/
 mkdir -p /run/php/
 
