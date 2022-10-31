@@ -2,8 +2,8 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
-  auth_basic           "Protection";
-  auth_basic_user_file /www/.htpasswd;
+  # auth_basic           "Protection";
+  # auth_basic_user_file /www/.htpasswd;
 
 	server_name _;
 
