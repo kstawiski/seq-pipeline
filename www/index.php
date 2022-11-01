@@ -18,6 +18,31 @@
     iframe.hidden {
         display: none
     }
+    /* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panelaa {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
     </style>
 
 </head>
@@ -39,13 +64,66 @@
                         
                     </div>
 </div><p></p>
-<div class="panel panel-default">
-                        <div class="panel-heading" style="text-align: left;"><i class="fas fa-terminal"></i>&emsp;&emsp;Simple terminal</div>
-                        <div class="panel-body">
-<iframe src="t.php" width="100%" height="400" frameBorder="0"></iframe>
-<p style="text-align:left">Useful: <code>top -b -n 1</code>, <code>free -h</code>, <code>df -h</code></p>
+
+<div class="panel panel-primary"><div class="panel-body">
+<button class="accordion"><i class="fas fa-terminal"></i>&emsp;&emsp;Simple terminal</button>
+<div class="panelaa">
+    <p></p>
+    <iframe src="t.php" width="100%" height="500" frameBorder="0"></iframe>
+    <p style="text-align:left">Useful: <code>top -b -n 1</code>, <code>free -h</code>, <code>df -h</code></p>
 </div>
+
+<button class="accordion"><i class="fas fa-sticky-note"></i>&emsp;&emsp;Notes</button>
+<div class="panelaa">
+<p></p>
+<iframe src="n/index.php?note=1" width="100%" height="400" frameBorder="0"></iframe>
+</div>
+
 </div></div>
+<p></p>
+<div class="col-xs-3 col-sm-3 col-lg-3" id="cpuDiv">
+                                <div class="pie_progress_cpu" role="progressbar" data-goal="33">
+                                    <div class="pie_progress__number">0%</div>
+                                    <div class="pie_progress__label">CPU</div>
+                                </div>
+
+                                <div class='title'></div>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-lg-3" id="memDiv">
+                                <div class="pie_progress_mem" role="progressbar" data-goal="33">
+                                    <div class="pie_progress__number">0%</div>
+                                    <div class="pie_progress__label">Memory</div>
+                                </div>
+
+                                <div class='title'></div>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-lg-3" id="diskDiv">
+                                <div class="pie_progress_disk" role="progressbar" data-goal="33">
+                                    <div class="pie_progress__number">0%</div>
+                                    <div class="pie_progress__label">Disk</div>
+                                </div>
+
+                                <div class='title'></div>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-lg-3" id="temperatureDiv">
+                                <div class="pie_progress_temperature" role="progressbar" data-goal="33">
+                                    <div class="pie_progress__number">0°</div>
+                                    <div class="pie_progress__label">Temperature</div>
+                                </div>
+                                <div class='title' style="display:none;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                     <script type="text/javascript" src="monitor/gauge/jquery-asPieProgress.js"></script>
@@ -117,44 +195,23 @@
                     }
                     </script>
                     <link rel="stylesheet" href="monitor/gauge/css/asPieProgress.css">
+                    <script>
+                        var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+                        </script>
                     <p></p>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="text-align: left;" ><i class="fas fa-heartbeat"></i>&emsp;&emsp;Resources (monitor)</div>
-                        <div class="panel-body">
-                            <div class="col-xs-3 col-sm-3 col-lg-3" id="cpuDiv">
-                                <div class="pie_progress_cpu" role="progressbar" data-goal="33">
-                                    <div class="pie_progress__number">0%</div>
-                                    <div class="pie_progress__label">CPU</div>
-                                </div>
-
-                                <div class='title'></div>
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3" id="memDiv">
-                                <div class="pie_progress_mem" role="progressbar" data-goal="33">
-                                    <div class="pie_progress__number">0%</div>
-                                    <div class="pie_progress__label">Memory</div>
-                                </div>
-
-                                <div class='title'></div>
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3" id="diskDiv">
-                                <div class="pie_progress_disk" role="progressbar" data-goal="33">
-                                    <div class="pie_progress__number">0%</div>
-                                    <div class="pie_progress__label">Disk</div>
-                                </div>
-
-                                <div class='title'></div>
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3" id="temperatureDiv">
-                                <div class="pie_progress_temperature" role="progressbar" data-goal="33">
-                                    <div class="pie_progress__number">0°</div>
-                                    <div class="pie_progress__label">Temperature</div>
-                                </div>
-                                <div class='title' style="display:none;"></div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         
