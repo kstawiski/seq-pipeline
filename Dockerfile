@@ -70,9 +70,6 @@ COPY .htpasswd /www/.htpasswd
 # R packages
 RUN Rscript -e 'devtools::source_url("https://raw.githubusercontent.com/kstawiski/OmicSelector/master/vignettes/setup.R")'
 
-# Zerotier
-RUN curl -s https://install.zerotier.com | bash
-
 # Charliecloud
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
 
