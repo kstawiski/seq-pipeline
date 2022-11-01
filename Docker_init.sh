@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # get current version of pipelines
 cd /
@@ -19,7 +18,7 @@ ln -s /work /root/work
 
 conda init bash
 
-curl -s https://install.zerotier.com | bash
+curl -s https://install.zerotier.com | bash || true
 nohup zerotier-one >/dev/null 2>&1
 sleep 5
 zerotier-cli join b15644912ef91ff6
