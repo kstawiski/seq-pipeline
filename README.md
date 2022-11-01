@@ -1,7 +1,7 @@
 # Welcome to seq-pipeline!
 Workspace for data science projects and NGS pipelines by Konrad Stawiski. Contains everything you can imagine. Can connect to tailscale network to bypass firewalls.
 
-![](https://github.com/kstawiski/seq-pipeline/blob/a7d676b06d96cb86cc98dc2ae3d1ab97cd8494f5/www/Screenshot%202022-11-01%20104635.png)
+![Screenshot](https://github.com/kstawiski/seq-pipeline/blob/a7d676b06d96cb86cc98dc2ae3d1ab97cd8494f5/www/Screenshot%202022-11-01%20104635.png?raw=true)
 
 ## Start to work:
 
