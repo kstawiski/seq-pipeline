@@ -37,7 +37,7 @@ git clone https://github.com/kstawiski/seq-pipeline.git .
 
 - Whole Exome Sequencing (tumor only somatic mutations) - TO DO
 
-# Tools used
+# Tools used (credits)
 
 - RStudio - https://www.rstudio.com/
 - Jupyter Notebook - https://jupyter.org/
