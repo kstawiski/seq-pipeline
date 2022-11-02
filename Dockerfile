@@ -26,16 +26,13 @@ RUN conda config --add channels defaults && conda config --add channels bioconda
 RUN mamba install -c bioconda -c conda-forge nextflow && apt-get -y install awscli samtools bcftools && pip3 install dbxfs && mamba init bash
 
 # R:
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran40/" && apt update && apt -y dist-upgrade && apt install -y r-base-dev r-recommended build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev && Rscript -e "install.packages(c('data.table','dplyr','devtools'))"
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -sc)-cran40/" && apt update && apt -y dist-upgrade && apt install -y r-base-dev r-recommended build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev && Rscript -e "install.packages(c('data.table','dplyr','devtools', 'languageserver'))"
 
 # Google Cloud for Terra
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y && export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s` && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && apt-get update && apt-get install gcsfuse -y
 
 # Get docker for docker in docker
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo bash get-docker.sh && rm get-docker.sh
-
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Localtunnel
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && apt-get install -y npm && apt-get install -y nodejs && npm install -g localtunnel
@@ -47,11 +44,10 @@ RUN wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singula
 RUN curl https://rclone.org/install.sh | bash
 
 # VSCODE:
-RUN curl -fsSL https://code-server.dev/install.sh | sh
+RUN curl -fsSL https://code-server.dev/install.sh | sh && code-server --install-extension ms-python.python --force && code-server --install-extension REditorSupport.r --force && code-server --install-extension formulahendry.code-runner --force && code-server --install-extension GrapeCity.gc-excelviewer --force && code-server --install-extension daghostman.vs-treeview --force && code-server --install-extension broadinstitute.wdl-devtools --force && code-server --install-extension Mikhail-Arkhipov.r --force && code-server --install-extension rogalmic.bash-debug --force
 
 # Extentions
-RUN conda install -c conda-forge jupyter_contrib_nbextensions nbresuse && jupyter contrib nbextension install --sys-prefix && jupyter nbextension enable varInspector/main && jupyter nbextension install --py nbresuse --sys-prefix && jupyter nbextension enable --py nbresuse --sys-prefix && pip install -U scikit-learn xgboost
-RUN pip install nbzip && jupyter serverextension enable --py nbzip --sys-prefix && jupyter nbextension install --py nbzip && jupyter nbextension enable --py nbzip
+RUN conda install -c conda-forge jupyter_contrib_nbextensions nbresuse && jupyter contrib nbextension install --sys-prefix && jupyter nbextension enable varInspector/main && jupyter nbextension install --py nbresuse --sys-prefix && jupyter nbextension enable --py nbresuse --sys-prefix && pip install -U scikit-learn xgboost torch pandas numpy && pip install nbzip && jupyter serverextension enable --py nbzip --sys-prefix && jupyter nbextension install --py nbzip && jupyter nbextension enable --py nbzip
 
 # RStudio server:
 RUN apt-get install -y libclang-dev libssl-dev gdebi-core && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.2-576-amd64.deb && gdebi -n rstudio-server-2022.07.2-576-amd64.deb && apt -f -y install && cd / && rm rstudio-server-2022.07.2-576-amd64.deb
