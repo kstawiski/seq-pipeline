@@ -1,7 +1,7 @@
 # Welcome to seq-pipeline!
 Workspace for data science projects and NGS pipelines by Konrad Stawiski. Contains everything you can imagine. Can connect to tailscale network to bypass firewalls. [Also contains OmicSelector preinstalled.](https://biostat.umed.pl/OmicSelector)
 
-![Screenshot](https://github.com/kstawiski/seq-pipeline/blob/main/www/Screenshot%202022-11-01%20105955.png?raw=true)
+![Screenshot](https://github.com/kstawiski/seq-pipeline/blob/main/www/Screenshot%202022-11-02%20142553.png?raw=true)
 
 ## Start to work:
 

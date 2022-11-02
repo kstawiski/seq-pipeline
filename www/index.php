@@ -2,7 +2,7 @@
 
 <head>
 
-    <title>KONSTA WORKSPACE</title>
+    <title><?php echo gethostname(); ?> - KONSTA WORKSPACE</title>
     <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
     <script src="jquery-ui.js" type="text/javascript"></script>
     <link rel="stylesheet" href="bootstrap.min.css" />

@@ -1,7 +1,7 @@
 <?php
 
 // Base URL of the website, without trailing slash.
-$base_url = 'https://notes.orga.cat';
+$base_url = 'http:// ' . $_SERVER['SERVER_ADDR'] . "/n";
 
 // Path to the directory to save the notes in, without trailing slash.
 // Should be outside of the document root, if possible.
