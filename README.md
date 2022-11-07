@@ -14,6 +14,14 @@ docker run --rm -d --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work
 
 Command above mounts your working directory as `/work`. Just go to `http://localhost:26969` to start work or setup tunnel as below.
 
+### Nvidia CUDA:
+
+For NVIDIA CUDA support use `kstawiski/seq-pipeline-gpu` image:
+
+```
+docker pull kstawiski/seq-pipeline
+docker run --rm -d --gpus all --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work/ -p 26969:80 --privileged -v /var/run/docker.sock:/var/run/docker.sock kstawiski/seq-pipeline-gpu
+```
 ### Setup tunnel:
 
 You need your free Tailscale network ID `XXX`, than run:
@@ -23,6 +31,8 @@ docker exec kgs24-work tailscale up --advertise-exit-node --accept-routes --auth
 ```
 
 Authkey setup - https://login.tailscale.com/admin/settings/keys
+
+Alternatively, you can use ngrok, e.g. `/ngrok http 8080 --log=stdout > /ngrok.log &` (may require ngrok setup, ngrok is located in `/ngrok`).
 
 ## Start new project:
 

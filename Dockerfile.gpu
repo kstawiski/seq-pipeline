@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 LABEL maintainer "Konrad Stawiski <konrad@konsta.com.pl>"
 
 ENV DEBIAN_FRONTEND=noninteractive

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Start ssh service
+service ssh start
+
 # get current version of pipelines
 cd /
 git clone https://github.com/kstawiski/seq-pipeline
