@@ -66,12 +66,9 @@
 </div><p></p>
 
 <div class="panel panel-primary"><div class="panel-body">
-<button class="accordion"><i class="fas fa-terminal"></i>&emsp;&emsp;Simple terminal</button>
-<div class="panelaa">
-    <p></p>
-    <iframe src="t.php" width="100%" height="500" frameBorder="0"></iframe>
-    <p style="text-align:left">Useful: <code>top -b -n 1</code>, <code>free -h</code>, <code>df -h</code></p>
-</div>
+    <p style="text-align:right"><a href="wetty/ssh/root?pass=konrad" target="_blank"><i class="fas fa-terminal"></i> New window</a></p>
+    <iframe src="wetty/ssh/root?pass=konrad" width="100%" height="500" frameBorder="0"></iframe>
+    <p style="text-align:left">Useful: <code>top -d1</code>, <code>free -h</code>, <code>df -h</code></p>
 
 <button class="accordion"><i class="fas fa-sticky-note"></i>&emsp;&emsp;Notes</button>
 <div class="panelaa">
@@ -217,7 +214,8 @@ for (i = 0; i < acc.length; i++) {
         
     </div>
 
-    <iframe src="/rstudio/auth-sign-in?appUri=%2F" width="0" height="0" tabindex="-1" title="empty" class="hidden">
+    <iframe src="/rstudio/auth-sign-in?appUri=%2F" width="0" height="0" tabindex="-1" title="empty" class="hidden"></iframe>
+    <iframe src="/n/index.php" width="0" height="0" tabindex="-1" title="empty" class="hidden"></iframe>
 </body>
 
 </html>
