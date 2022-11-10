@@ -52,5 +52,6 @@ git clone https://github.com/kstawiski/seq-pipeline.git .
 - RStudio - https://www.rstudio.com/
 - Jupyter Notebook - https://jupyter.org/
 - VSCode - https://code.visualstudio.com/, https://github.com/coder/code-server
-- Terminal is based on https://github.com/jcubic/jsh.php
+- Terminal is using https://github.com/butlerx/wetty
 - Resources monitor uses https://github.com/DanielnetoDotCom/ServerMonitor 
+- Notes use https://github.com/artyuum/simple-note
