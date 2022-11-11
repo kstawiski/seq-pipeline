@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Setup Ubuntu
 ENV TZ=Europe/Warsaw
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-RUN chsh -s /bin/bash root && echo 'SHELL=/bin/bash' >> /etc/environment && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt update && apt dist-upgrade -y && apt-get install -y pciutils libkmod-dev libgsl-dev libv8-dev mc nano libglu1-mesa-dev libharfbuzz-dev libfribidi-dev libgit2-dev gdebi uuid apt-transport-https screen libfontconfig1-dev openssh-server build-essential libxml2-dev xorg ca-certificates cmake curl git libatlas-base-dev libcurl4-openssl-dev libjemalloc-dev liblapack-dev libopenblas-dev libzmq3-dev software-properties-common sudo unzip wget && add-apt-repository -y ppa:ubuntu-toolchain-r/test && apt update && apt install -y build-essential libmagick++-dev libbz2-dev libpcre2-16-0 libpcre2-32-0 libpcre2-8-0 libpcre2-dev fort77 xorg-dev liblzma-dev  libblas-dev gfortran gcc-multilib gobjc++ libreadline-dev && apt install -y libcairo2-dev freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev libglfw3-dev libgles2-mesa-dev libopenblas-dev liblapack-dev build-essential git gcc cmake libcairo2-dev libxml2-dev build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev awscli libsquashfuse-dev supervisor default-jdk && mkdir /www && mkdir /work
+RUN chsh -s /bin/bash root && echo 'SHELL=/bin/bash' >> /etc/environment && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apt update && apt dist-upgrade -y && apt-get install -y pciutils libkmod-dev libgsl-dev libv8-dev mc nano libglu1-mesa-dev libharfbuzz-dev libfribidi-dev libgit2-dev gdebi uuid apt-transport-https screen libfontconfig1-dev openssh-server build-essential libxml2-dev xorg ca-certificates cmake curl git libatlas-base-dev libcurl4-openssl-dev libjemalloc-dev liblapack-dev libopenblas-dev libzmq3-dev software-properties-common sudo unzip wget && add-apt-repository -y ppa:ubuntu-toolchain-r/test && apt update && apt install -y build-essential libmagick++-dev libbz2-dev libpcre2-16-0 libpcre2-32-0 libpcre2-8-0 libpcre2-dev fort77 xorg-dev liblzma-dev  libblas-dev gfortran gcc-multilib gobjc++ libreadline-dev && apt install -y libcairo2-dev freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev libglfw3-dev libgles2-mesa-dev libopenblas-dev liblapack-dev build-essential git gcc cmake libcairo2-dev libxml2-dev build-essential openslide-tools g++ gcc libblas-dev liblapack-dev libcurl4-gnutls-dev libxml2-dev libssl-dev awscli libsquashfuse-dev supervisor default-jdk && mkdir /www && mkdir /work
 
 # Install Anaconda
 ENV PATH /opt/conda/bin:$PATH
@@ -47,7 +47,7 @@ RUN curl https://rclone.org/install.sh | bash
 RUN curl -fsSL https://code-server.dev/install.sh | sh && code-server --install-extension ms-python.python --force && code-server --install-extension REditorSupport.r --force && code-server --install-extension formulahendry.code-runner --force && code-server --install-extension GrapeCity.gc-excelviewer --force && code-server --install-extension daghostman.vs-treeview --force && code-server --install-extension broadinstitute.wdl-devtools --force && code-server --install-extension Mikhail-Arkhipov.r --force && code-server --install-extension rogalmic.bash-debug --force
 
 # Extentions
-RUN conda install -c conda-forge jupyter_contrib_nbextensions nbresuse && jupyter contrib nbextension install --sys-prefix && jupyter nbextension enable varInspector/main && jupyter nbextension install --py nbresuse --sys-prefix && jupyter nbextension enable --py nbresuse --sys-prefix && pip install -U scikit-learn xgboost torch pandas numpy && pip install nbzip && jupyter serverextension enable --py nbzip --sys-prefix && jupyter nbextension install --py nbzip && jupyter nbextension enable --py nbzip
+RUN conda install -c conda-forge jupyter_contrib_nbextensions nb_conda_kernels nbresuse && jupyter contrib nbextension install --sys-prefix && jupyter nbextension enable varInspector/main && jupyter nbextension install --py nbresuse --sys-prefix && jupyter nbextension enable --py nbresuse --sys-prefix && pip install -U scikit-learn xgboost torch pandas numpy && pip install nbzip && jupyter serverextension enable --py nbzip --sys-prefix && jupyter nbextension install --py nbzip && jupyter nbextension enable --py nbzip
 
 # RStudio server:
 RUN apt-get install -y libclang-dev libssl-dev gdebi-core && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.2-576-amd64.deb && gdebi -n rstudio-server-2022.07.2-576-amd64.deb && apt -f -y install && cd / && rm rstudio-server-2022.07.2-576-amd64.deb
@@ -73,7 +73,7 @@ RUN echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf && e
 RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 # Terminal
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && echo 'export NOTVISIBLE="in users profile"' >> ~/.bashrc && echo "export VISIBLE=now" >> /etc/profile && echo 'root:konrad' | chpasswd && npm install -g yarn && yarn global add wetty
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && echo 'export NOTVISIBLE="in users profile"' >> ~/.bashrc && echo "export VISIBLE=now" >> /etc/profile && echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && echo 'root:konrad' | chpasswd && npm install -g yarn && yarn global add wetty
 
 # Charliecloud
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
@@ -82,5 +82,6 @@ ADD Docker_init.sh /
 ADD config.yaml /
 RUN chmod +x /Docker_init.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 8080
+EXPOSE 80
+EXPOSE 22
 CMD ["/usr/bin/supervisord"]
