@@ -9,18 +9,20 @@ This is the Docker image with VSCode, RStudio, Jupyter Notebook and file manager
 
 ```
 docker pull kstawiski/seq-pipeline
-docker run --rm -d --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work/ -p 26969:80 --privileged -v /var/run/docker.sock:/var/run/docker.sock kstawiski/seq-pipeline
+docker run --rm -d --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work/ -v /home/$USER/:/home/$USER/ -p 26969:80 --privileged -v /var/run/docker.sock:/var/run/docker.sock kstawiski/seq-pipeline
 ```
 
 Command above mounts your working directory as `/work`. Just go to `http://localhost:26969` to start work or setup tunnel as below.
+
+Note that when using Docker in Docker, for example by running the WDL pipeline via Cromwell, the path `/work` will not work. You can make a symlink on host device or bind the exact same path to the docker container. 
 
 ### Nvidia CUDA:
 
 For NVIDIA CUDA support use `kstawiski/seq-pipeline-gpu` image:
 
 ```
-docker pull kstawiski/seq-pipeline
-docker run --rm -d --gpus all --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work/ -p 26969:80 --privileged -v /var/run/docker.sock:/var/run/docker.sock kstawiski/seq-pipeline-gpu
+docker pull kstawiski/seq-pipeline-gpu
+docker run --rm -d --gpus all --name kgs24-work --hostname $(hostname)-work -v $(pwd):/work/ -p 26969:80 --privileged -v /home/$USER/:/home/$USER/ -v /var/run/docker.sock:/var/run/docker.sock kstawiski/seq-pipeline-gpu
 ```
 ### Setup tunnel:
 
