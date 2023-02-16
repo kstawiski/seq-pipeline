@@ -77,6 +77,9 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 # Charliecloud
 # RUN sysctl -w kernel.unprivileged_userns_clone=1 && wget https://github.com/hpc/charliecloud/releases/download/v0.29/charliecloud-0.29.tar.gz && tar xvzf charliecloud-0.29.tar.gz && rm charliecloud-0.29.tar.gz && cd charliecloud-0.29 && ./autogen.sh && ./configure && make && make install
 
+# Squid (running only in tailscale)
+RUN apt -y install squid && rm -f /etc/squid/squid.conf && wget --no-check-certificate -O /etc/squid/squid.conf https://gist.githubusercontent.com/radenvodka/d26f13fd2f7398d31635bcf17f9330b7/raw/432fbcee54c986248168851263720852a6b11005/squid.conf && iptables -I INPUT -p tcp --dport 3128 -j ACCEPT && iptables-save
+
 ADD Docker_init.sh /
 ADD config.yaml /
 RUN chmod +x /Docker_init.sh
