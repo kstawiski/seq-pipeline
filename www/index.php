@@ -66,17 +66,7 @@
 </div><p></p>
 
 <div class="panel panel-primary"><div class="panel-body">
-    <p style="text-align:right"><a href="wetty/ssh/root?pass=konrad" target="_blank"><i class="fas fa-terminal"></i> New window</a></p>
-    <iframe src="wetty/ssh/root?pass=konrad" width="100%" height="500" frameBorder="0"></iframe>
-    <p style="text-align:left">Useful: <code>top -d1</code>, <code>free -h</code>, <code>df -h</code></p>
     <p style="text-align:left">SSH connection for terminal & files (SCP, SFTP): <code>sshpass -p konrad ssh root@<?php echo $_SERVER['SERVER_ADDR']; ?></code></p>
-
-<button class="accordion"><i class="fas fa-sticky-note"></i>&emsp;&emsp;Notes</button>
-<div class="panelaa">
-<p></p>
-<iframe src="n.php" width="100%" height="500" frameBorder="0"></iframe>
-</div>
-
 </div></div>
 <p></p>
 <div class="col-xs-3 col-sm-3 col-lg-3" id="cpuDiv">
